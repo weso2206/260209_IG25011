@@ -1,0 +1,1 @@
+// All application logic is in index.html for single-file submission.

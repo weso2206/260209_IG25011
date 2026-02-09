@@ -1,0 +1,5 @@
+{
+  "name": "Japanease Learning Hub",
+  "description": "An interactive language learning application that generates flashcards and 10-question quizzes for any Japanese keyword using the Gemini AI. Supports bilingual UI (English/Japanese).",
+  "requestFramePermissions": []
+}
