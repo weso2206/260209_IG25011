@@ -5,10 +5,11 @@ import { QuizQuestion, UIContent } from '../types';
 interface QuizProps {
   questions: QuizQuestion[];
   ui: UIContent;
+  onComplete: (score: number) => void;
   onRestart: () => void;
 }
 
-const Quiz: React.FC<QuizProps> = ({ questions, ui, onRestart }) => {
+const Quiz: React.FC<QuizProps> = ({ questions, ui, onComplete, onRestart }) => {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
@@ -31,12 +32,13 @@ const Quiz: React.FC<QuizProps> = ({ questions, ui, onRestart }) => {
       setShowExplanation(false);
     } else {
       setIsFinished(true);
+      onComplete(score);
     }
   };
 
   if (isFinished) {
     return (
-      <div className="bg-white rounded-3xl p-8 shadow-lg text-center max-w-xl mx-auto border border-slate-100">
+      <div className="bg-white rounded-3xl p-8 shadow-lg text-center max-w-xl mx-auto border border-slate-100 animate-fadeIn">
         <div className="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6 text-indigo-600">
           <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -59,7 +61,7 @@ const Quiz: React.FC<QuizProps> = ({ questions, ui, onRestart }) => {
   const q = questions[currentIdx];
 
   return (
-    <div className="max-w-2xl mx-auto mb-12">
+    <div className="max-w-2xl mx-auto mb-12 animate-fadeIn">
       <div className="flex justify-between items-center mb-4 px-2">
         <span className="text-sm font-bold text-indigo-600 uppercase tracking-widest">Question {currentIdx + 1} of 10</span>
         <div className="w-48 h-2 bg-slate-200 rounded-full overflow-hidden">
